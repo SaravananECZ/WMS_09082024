@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warehouse Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 100px;
+        }
+        .form-group .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-group .submit-btn:hover {
+            background-color: #45a049;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            width: 100%; /* Full width */
+            max-width: 400px; /* Maximum width */
+            margin-bottom: 20px; /* Space between dropdowns */
+        }
+        .dropdown-selected {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            text-align: left;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            width: 100%;
+            border: 1px solid #ddd;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            border-radius: 4px;
+            z-index: 1;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .dropdown-content label {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            cursor: pointer;
+            border-bottom: 1px solid #ddd;
+        }
+        .dropdown-content label:hover {
+            background-color: #ddd;
+        }
+        .dropdown-content input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .dropdown.show .dropdown-content {
+            display: block;
+        }
+        .rectangle-box {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f0f0f0;
+            width: 100%;
+            max-width: 400px; /* Match the width of the dropdown */
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+            border-radius: 4px;
+        }
+        .selected-item {
+            display: inline-block;
+            padding: 5px 10px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .selected-item .remove {
+            margin-left: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .selected-item:hover {
+            background-color: #2980b9;
+        }
+                #imageUpload {
+            margin-bottom: 20px;
+        }
+
+        .preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .preview {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border: 2px solid #ccc;
+            background-color: #fff;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #previewImage {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+        }
+
+        .clear-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 2px 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .clear-button:hover {
+            background: darkred;
+        }
+    </style>
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Warehouse Form</h2>
+    <form method="post" enctype="multipart/form-data">
+        <!-- CSRF Token for security (if using Django or similar) -->
+        <!-- {% csrf_token %} -->
+
+        <div class="form-group">
+            <label for="id_Warehouse_Name">Warehouse Name:</label>
+            <input type="text" id="id_Warehouse_Name" name="Warehouse_Name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="id_Warehouse_location">Warehouse Location:</label>
+            <input type="text" id="id_Warehouse_location" name="Warehouse_location" required>
+        </div>
+
+        <!-- Dropdown for Floor Type -->
+        <div class="form-group">
+            <label for="floor-select">Select Floor Type:</label>
+            <select id="floor-select" name="floor_type">
+                <option value="none">-- Select a Floor Type --</option>
+                <option value="ground">Ground Floor</option>
+                <option value="first">First Floor</option>
+            </select>
+        </div>
+
+        <!-- Ground Floor Specific Input -->
+        <div class="form-group floor-specific" id="ground-floor-specific">
+            <label for="id_ground_floor_info">Ground Floor Square Feet:</label>
+            <input type="number" id="id_ground_floor_info" name="ground_floor_square_feet">
+        </div>
+
+        <!-- First Floor Specific Input -->
+        <div class="form-group floor-specific" id="first-floor-specific">
+            <label for="id_first_floor_square_feet">First Floor Square Feet:</label>
+            <input type="number" id="id_first_floor_square_feet" name="first_floor_square_feet">
+        </div>
+
+        <div class="form-group">
+            <label for="id_Warehouse_square_feet">Warehouse Square Feet:</label>
+            <input type="number" id="id_Warehouse_square_feet" name="Warehouse_square_feet">
+        </div>
+        
+        <div class="form-group">
+            <label for="id_Warehouse_amount">Warehouse Amount:</label>
+            <input type="number" id="id_Warehouse_amount" name="Warehouse_amount">
+        </div>
+
+	<div class="form-group">
+        <label for="id_images">Warehouse Images:</label>
+        <input type="file" id="imageUpload" accept="image/*" multiple>
+        <div id="previewContainer" class="preview-container"></div>
+    </div>
+
+        <div class="form-group">
+            <label for="id_Additional_amount">Additional Amount:</label>
+            <input type="number" id="id_Additional_amount" name="Additional_amount">
+        </div>
+
+        <div class="form-group">
+            <label for="id_facilities">Facilities or Amenities:</label>
+            <select id="id_facilities" name="facilities">
+                <option value="security">Security</option>
+                <option value="climate_control">Climate Control</option>
+                <option value="loading_docks">Loading Docks</option>
+                <option value="office_space">Office Space</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="id_permitted_items">Permitted Items:</label>
+            <select id="id_permitted_items" name="permitted_items">
+                <option value="electronics">Electronics</option>
+                <option value="furniture">Furniture</option>
+                <option value="clothing">Clothing</option>
+                <option value="food">Food</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-selected">Prohibited Items</div>
+            <div class="dropdown-content">
+                <label><input type="checkbox" value="flammable_materials"> Flammable Materials</label>
+                <label><input type="checkbox" value="explosives"> Explosives</label>
+                <label><input type="checkbox" value="live_animals"> Live Animals</label>
+                <label><input type="checkbox" value="toxic_substances"> Toxic Substances</label>
+            </div>
+            <div class="rectangle-box" id="rectangle-box-1">
+                No items selected.
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <div class="dropdown-selected">Types of Warehouses</div>
+            <div class="dropdown-content">
+                <label><input type="checkbox" value="private_warehouses"> Private Warehouses</label>
+                <label><input type="checkbox" value="bonded_warehouses"> Bonded Warehouses</label>
+                <label><input type="checkbox" value="distribution_centers"> Distribution Centers</label>
+                <label><input type="checkbox" value="cold_storage_warehouses"> Cold Storage Warehouses</label>
+                <label><input type="checkbox" value="fulfillment_centers"> Fulfillment Centers</label>
+                <label><input type="checkbox" value="automated_warehouses"> Automated Warehouses</label>
+                <label><input type="checkbox" value="cross_docking_facilities"> Cross-Docking Facilities</label>
+                <label><input type="checkbox" value="hazardous_material_warehouses"> Hazardous Material Warehouses</label>
+            </div>
+            <div class="rectangle-box" id="rectangle-box-2">
+                No items selected.
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-selected">Facilities or Amenities</div>
+            <div class="dropdown-content">
+                <label><input type="checkbox" value="fire_extinguishers"> Fire Extinguishers</label>
+                <label><input type="checkbox" value="fire_alarms"> Fire Alarms</label>
+                <label><input type="checkbox" value="emergency_exits"> Emergency Exits</label>
+                <label><input type="checkbox" value="cctv_coverage"> CCTV Coverage</label>
+                <label><input type="checkbox" value="monitoring"> 24/7 Monitoring</label>
+                <label><input type="checkbox" value="access_control"> Access Control</label>
+                <label><input type="checkbox" value="first_aid_stations"> First Aid Stations</label>
+                <label><input type="checkbox" value="emergency_lighting"> Emergency Lighting</label>
+                <label><input type="checkbox" value="security_guards"> Security Guards</label>
+                <label><input type="checkbox" value="climate_controlled_areas"> Climate-Controlled Areas</label>
+                <label><input type="checkbox" value="ventilation_systems"> Ventilation Systems</label>
+                <label><input type="checkbox" value="regulatory_compliance"> Regulatory Compliance</label>
+            </div>
+            <div class="rectangle-box" id="rectangle-box-3">
+                No items selected.
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <button type="submit" class="submit-btn">Submit</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Handle floor-specific inputs visibility
+    document.getElementById('floor-select').addEventListener('change', function() {
+        var selectedValue = this.value;
+        document.getElementById('ground-floor-specific').style.display = (selectedValue === 'ground' || selectedValue === 'first') ? 'block' : 'none';
+        document.getElementById('first-floor-specific').style.display = selectedValue === 'first' ? 'block' : 'none';
+    });
+
+    // Function to update the rectangle box for a specific dropdown
+    function updateRectangleBox(dropdown) {
+        const checkboxes = dropdown.querySelectorAll('.dropdown-content input[type="checkbox"]');
+        const rectangleBox = dropdown.querySelector('.rectangle-box');
+
+        const selectedItems = Array.from(checkboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => ({
+                text: checkbox.parentNode.textContent.trim(),
+                value: checkbox.value
+            }));
+
+        rectangleBox.innerHTML = `
+            ${selectedItems.length > 0
+                ? selectedItems.map(item => `
+                    <div class="selected-item" data-value="${item.value}">
+                        ${item.text}
+                        <span class="remove" onclick="removeItem('${item.value}', this)">&times;</span>
+                    </div>
+                `).join('')
+                : 'No items selected.'
+            }
+        `;
+    }
+
+    // Add event listeners to checkboxes in all dropdowns
+    document.querySelectorAll('.dropdown-content input[type="checkbox"]').forEach((checkbox) => {
+        checkbox.addEventListener('change', (event) => {
+            const dropdown = event.target.closest('.dropdown');
+            updateRectangleBox(dropdown);
+        });
+    });
+
+    // Function to remove a selected item
+    function removeItem(value, removeButton) {
+        const dropdown = removeButton.closest('.dropdown');
+        dropdown.querySelector(`.dropdown-content input[value="${value}"]`).checked = false;
+        updateRectangleBox(dropdown);
+    }
+
+    // Toggle the dropdown menu visibility
+    document.querySelectorAll('.dropdown-selected').forEach((dropdownSelected) => {
+        dropdownSelected.addEventListener('click', function() {
+            const dropdown = dropdownSelected.closest('.dropdown');
+            dropdown.classList.toggle('show');
+        });
+    });
+
+    // Close the dropdown if clicked outside
+    window.addEventListener('click', function(event) {
+        if (!event.target.matches('.dropdown-selected')) {
+            document.querySelectorAll('.dropdown.show').forEach(dropdown => {
+                dropdown.classList.remove('show');
+            });
+        }
+    });
+</script>
+<script>
+        document.getElementById('imageUpload').addEventListener('change', function(event) {
+            const files = event.target.files;
+            const previewContainer = document.getElementById('previewContainer');
+
+            // Clear previous previews
+            previewContainer.innerHTML = '';
+
+            // Limit the number of files to 5
+            const fileCount = Math.min(files.length, 5);
+
+            for (let i = 0; i < fileCount; i++) {
+                const file = files[i];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = e.target.result;
+                        imgElement.id = 'previewImage';
+                        imgElement.alt = 'Image Preview';
+
+                        const clearButton = document.createElement('button');
+                        clearButton.textContent = 'X';
+                        clearButton.className = 'clear-button';
+
+                        const previewBox = document.createElement('div');
+                        previewBox.className = 'preview';
+                        previewBox.appendChild(imgElement);
+                        previewBox.appendChild(clearButton);
+
+                        previewContainer.appendChild(previewBox);
+
+                        clearButton.addEventListener('click', function() {
+                            previewBox.remove();
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

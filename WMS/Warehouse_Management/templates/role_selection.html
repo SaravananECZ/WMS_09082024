@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Select Role</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    .role-button {
+      display: block;
+      background-color: white;
+      border-radius: 0.375rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease-in-out;
+    }
+    .role-button:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .role-button img {
+      width: 12rem;
+      height: 12rem;
+      object-fit: cover;
+      border-radius: 0.375rem;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">
+    <h1 class="text-2xl font-bold mb-6 text-gray-800 text-center">
+      Select Your Role
+    </h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Manufacturer Button -->
+      <button 
+        onclick="location.href='{% url 'accounts:manufacturer_details' %}'" 
+        class="role-button p-4 text-center"
+      >
+        <img
+          src="https://cloudfront-us-east-2.images.arcpublishing.com/reuters/LVKFQ57N45LLJJJTHRYLQIGDUI.jpg"
+          alt="Manufacturer"
+          class="mx-auto mb-4"
+        />
+        <h2 class="text-xl font-semibold mb-4 text-gray-700">
+          Manufacturer
+        </h2>
+      </button>
+      
+      <!-- Warehouse Owner Button -->
+      <button 
+        onclick="location.href='{% url 'accounts:warehouse_owner_details' %}'"
+        class="role-button p-4 text-center"
+      >
+        <img
+          src="https://b2556974.smushcdn.com/2556974/wp-content/uploads/2023/04/Shutterstock_1159956514.jpg?lossy=1&strip=1&webp=1"
+          alt="Warehouse Owner"
+          class="mx-auto mb-4"
+        />
+        <h2 class="text-xl font-semibold mb-4 text-gray-700">
+          Warehouse Owner
+        </h2>
+      </button>
+    </div>
+  </div>
+</body>
+</html>

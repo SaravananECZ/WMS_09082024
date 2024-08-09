@@ -1,0 +1,17 @@
+<!-- polls/templates/polls/detail.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question Detail</title>
+</head>
+<body>
+    <h1>{{ question.question_text }}</h1>
+    <ul>
+    {% for choice in question.choice_set.all %}
+        <li>{{ choice.choice_text }} - {{ choice.votes }} votes</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

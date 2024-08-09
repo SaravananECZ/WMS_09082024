@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantastic UI Design</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            width: 600px;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .left-side, .right-side {
+            flex: 1;
+            padding: 20px;
+        }
+        .left-side img {
+            max-width: 100%;
+            height: 65vh;
+            display: block;
+            border-radius: 10px;
+        }
+        .right-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: left;
+            color: #0d172a;
+        }
+        .right-side h2 {
+            font-size: 20px;
+            margin-bottom: 25px;
+        }
+        .right-side label {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 10px;
+            color: #4e54c8; /* Adjusted label color */
+        }
+        .right-side input[type="email"],
+        .right-side input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box; /* Ensure padding and border are included in width */
+        }
+        
+        .right-side p {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .right-side a {
+            color: #4e54c8;
+            text-decoration: none;
+        }
+        .right-side a:hover {
+            text-decoration: underline;
+        }
+        .button-81 {
+            background-color: #fff;
+            border: 0 solid #e2e8f0;
+            border-radius: 1.5rem;
+            box-sizing: border-box;
+            color: #0d172a;
+            cursor: pointer;
+            display: inline-block;
+            font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+            font-size: 1rem; /* Reduced font size */
+            font-weight: 600;
+            line-height: 1;
+            padding: 0.8rem 1.4rem; /* Reduced padding */
+            text-align: center;
+            text-decoration: none #0d172a solid;
+            text-decoration-thickness: auto;
+            transition: all .1s cubic-bezier(.4, 0, .2, 1);
+            box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        .button-81:hover {
+            background-color: #1e293b;
+            color: #fff;
+        }
+
+        @media (min-width: 768px) {
+            .button-81 {
+                font-size: 1.125rem;
+                padding: 1rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="left-side">
+            <img src="https://3pllinks.com/wp-content/uploads/2022/11/supply-chain-management-qu-est-ce-que-c-est.jpg.webp" alt="Supply Chain Management Image">
+        </div>
+        <div class="right-side">
+            <h2>Login</h2>
+            <form method="post">
+                {% csrf_token %}
+                <label for="email">Email:</label><br>
+                <input type="email" id="username" name="username" required><br><br>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" required><br><br>
+           
+                <button type="submit" class="button-81" role="button">Login</button>
+            </form>
+            <p>Don't have an account? <a href="{% url 'accounts:register' %}">Register here</a></p>
+            <p><a href="{% url 'accounts:password_reset' %}">Forgot your password?</a></p>
+        </div>
+    </div>
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>

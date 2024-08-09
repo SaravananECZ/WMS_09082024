@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manufacturer Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">
+        <h1 class="text-2xl font-bold mb-6 text-gray-800 text-center">Manufacturer Registration</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="mb-4">
+                    <label for="GSTNumber_MCU" class="block text-gray-700 font-medium mb-2">GST Number</label>
+                    <input type="text" id="GSTNumber_MCU" name="GSTNumber_MCU" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                </div>
+                
+                <div class="mb-4">
+                    <label for="MCANumber_MCU" class="block text-gray-700 font-medium mb-2">MCA Number</label>
+                    <input type="text" id="MCANumber_MCU" name="MCANumber_MCU" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required />
+                </div>
+                <div class="mb-4">
+                    <label for="CompanyName_MCU" class="block text-gray-700 font-medium mb-2">Company Name</label>
+                    <input type="text" id="CompanyName_MCU" name="CompanyName_MCU" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required />
+                </div>
+                <div class="mb-4">
+                    <label for="PanNumber_MCU" class="block text-gray-700 font-medium mb-2">PAN Number</label>
+                    <input type="text" id="PanNumber_MCU" name="PanNumber_MCU" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                </div>
+                <div class="mb-4">
+                    <label for="Emailid_MCU" class="block text-gray-700 font-medium mb-2">EMail ID</label>
+                    <input type="email" id="Emailid_MCU" name="Emailid_MCU" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                </div>
+                <div class="mb-4">
+                    <label for="Contact_MCU" class="block text-gray-700 font-medium mb-2">Contact Details</label>
+                    <input type="text" id="Contact_MCU" name="Contact_MCU" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                </div>
+            </div>
+            <div class="mb-4">
+                <label for="Address_MCU" class="block text-gray-700 font-medium mb-2">Address</label>
+                <textarea id="Address_MCU" name="Address_MCU" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+            </div>
+            <div class="flex justify-end">
+                <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-400">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

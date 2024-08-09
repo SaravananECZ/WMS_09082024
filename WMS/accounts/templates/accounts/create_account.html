@@ -1,0 +1,20 @@
+<!-- create_account.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Account</title>
+</head>
+<body>
+    <h2>Create Your Account</h2>
+    <p>Use the email <strong>{{ email }}</strong> to create your account.</p>
+    <form method="post">
+        {% csrf_token %}
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br><br>
+        <!-- Hidden field to pass email value -->
+        <input type="hidden" name="email" value="{{ email }}">
+        <button type="submit">Create Account</button>
+    </form>
+</body>
+</html>

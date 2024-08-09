@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search</title>
+</head>
+<body>
+    <h2>Search</h2>
+
+    <form method="get" action="{% url 'search' %}">
+        <label for="q">Search:</label>
+        <input type="text" id="q" name="q" value="{{ query }}" placeholder="Enter search term" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if results %}
+        <h3>Search Results:</h3>
+        <ul>
+            {% for item in results %}
+                <li>{{ item.name }}</li>  <!-- Adjust according to your model fields -->
+            {% endfor %}
+        </ul>
+    {% elif query %}
+        <p>No results found for "{{ query }}"</p>
+    {% endif %}
+</body>
+</html>
